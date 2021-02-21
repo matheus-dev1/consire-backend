@@ -19,7 +19,7 @@ const database = connection();
 
 //Middlewares
     server.use(cors({
-        origin:['http://localhost:3000'],
+        origin:['https://conscire-front.herokuapp.com/'],
         methods: ['GET', 'POST', 'PUT'],
         credentials: true
     })); //Permite a leitura de fontes externas
