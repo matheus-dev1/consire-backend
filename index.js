@@ -250,12 +250,13 @@ server.post('/audit/retorna', function(req,res){
 	const email = req.body.email;
 	console.log(email)
 
-    const sql = `SELECT * FROM login WHERE email='${email}'`;
+    const sql = `SELECT audit FROM login WHERE email='${email}'`;
     database.query(sql, (error, resultado) =>{
         if(error){
             console.log(error)
         }
         console.log(resultado)
+        const resultado = resultado;
         const audit = 20
         if (audit <= 7){
             const message = "ZONA I: Pessoas que se localizam na ZONA I geralmente fazem uso de baixo risco de álcool ou são abstêmias. De uma forma geral, são pessoas que bebem menos de duas doses-padrão por dia ou que não ultrapassam a quantidade de cinco doses-padrão em uma única ocasião. A intervenção adequada nesse nível é a educação em saúde, para que haja a manutenção do padrão de uso atual."
@@ -272,7 +273,7 @@ server.post('/audit/retorna', function(req,res){
             
         else if (audit  >= 20){
             const message = 'ZONA IV: Pessoas que se encontram nesse nível apresentam grande chance de ter um diagnóstico de dependência. Nesse caso, é preciso fazer uma avaliação mais cuidadosa e, se confirmado o diagnóstico, deve-se motivar o usuário a procurar atendimento especializado para acompanhamento e encaminhá-lo ao serviço adequado. Lista de Caps-AD (Centros de Atenção Psicossocial em SP):https://www.prefeitura.sp.gov.br/cidade/secretarias/saude/atencao_basica/index.php?p=204204'
-            res.json({message: message});
+            res.json({message: message, resultado: resultado});
         }             
     })            
 });
