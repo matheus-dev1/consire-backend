@@ -19,7 +19,7 @@ const database = connection();
 
 //Middlewares
 server.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
         res.header("Access-Control-Allow-Methods", 'GET,PUT,POST');
         server.use(cors());
         next();
