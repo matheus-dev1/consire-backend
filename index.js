@@ -255,8 +255,8 @@ server.post('/audit/retorna', function(req,res){
         if(error){
             console.log(error)
         }
-        console.log(resultado[0].AUDIT)
-        const audit = parseInt(resultado[0].AUDIT)
+        console.log(resultado[0].audit)
+        const audit = parseInt(resultado[0].audit)
         if (audit <= 7){
             const message = "ZONA I: Pessoas que se localizam na ZONA I geralmente fazem uso de baixo risco de álcool ou são abstêmias. De uma forma geral, são pessoas que bebem menos de duas doses-padrão por dia ou que não ultrapassam a quantidade de cinco doses-padrão em uma única ocasião. A intervenção adequada nesse nível é a educação em saúde, para que haja a manutenção do padrão de uso atual."
             res.json({message: message});
