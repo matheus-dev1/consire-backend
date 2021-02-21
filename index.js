@@ -279,6 +279,6 @@ server.post('/audit/retorna', function(req,res){
 
 
 
-server.listen(5000, ()=>{ //Indica qual porta o server irá rodar.
+server.listen(process.env.PORT || 5000, ()=>{ //Indica qual porta o server irá rodar.
     console.log("Server on")
 })
