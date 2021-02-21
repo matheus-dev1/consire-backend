@@ -18,11 +18,12 @@ const database = connection();
 
 
 //Middlewares
-    server.use(cors({
-        origin:['http://localhost:3000'],
-        methods: ['GET', 'POST', 'PUT'],
-        credentials: true
-    })); //Permite a leitura de fontes externas
+server.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
+        res.header("Access-Control-Allow-Methods", 'GET,PUT,POST');
+        server.use(cors({credentials: true}));
+        next();
+});
 
     server.use(cookie())
 
@@ -55,6 +56,7 @@ server.post('/register', [
     check('senha', 'A senha precisa ter no mínimo 5 dígitos e no máximo 8!').exists().isLength({min:5,max:8}),
     check('confirme', 'A senha precisa ser igual a digitada anteriormente!').exists().isLength({min:5,max:8}),
 ], (req, res) =>{
+    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
     const nome = req.body.nome;
     const email = req.body.email;
     const senha= req.body.senha;
@@ -112,6 +114,7 @@ server.post('/register', [
 
 
 server.post('/login', (req, res) =>{
+    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
     const email = req.body.email;
     const senha= req.body.senha;
 
@@ -182,6 +185,7 @@ server.get('/login', (req, res)=>{
 
 
 server.get('/comentarios/retorna', (req, res)=>{
+    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
     const sql = "SELECT * FROM  comentarios;";
     database.query(sql, (error, results) =>{
         res.json(results)  
@@ -197,6 +201,7 @@ server.post('/comentarios/envia', [
     check('sobrenome', 'Sobrenome é obrigatório com pelo menos 3 caracteres').exists().isLength({min:3}),
     check('msg', 'A mensagem precisa ter pelo menos 3 caracteres').exists().isLength({min:3}),
 ], (req, res)=>{
+    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
     const {nome, sobrenome, msg} = req.body; //Desestruturação do corpo da requisiçao em dois elementos que iremos enviar ao bd
     var errors = validationResult(req);
     if(!errors.isEmpty()){
@@ -250,13 +255,12 @@ server.post('/audit/retorna', function(req,res){
 	const email = req.body.email;
 	console.log(email)
 
-    const sql = `SELECT AUDIT FROM login WHERE email='${email}'`;
+    const sql = `SELECT audit FROM login WHERE email='${email}'`;
     database.query(sql, (error, resultado) =>{
         if(error){
             console.log(error)
         }
-        console.log(resultado[0].AUDIT)
-        const audit = parseInt(resultado[0].AUDIT)
+        const audit = resultado[0].audit
         if (audit <= 7){
             const message = "ZONA I: Pessoas que se localizam na ZONA I geralmente fazem uso de baixo risco de álcool ou são abstêmias. De uma forma geral, são pessoas que bebem menos de duas doses-padrão por dia ou que não ultrapassam a quantidade de cinco doses-padrão em uma única ocasião. A intervenção adequada nesse nível é a educação em saúde, para que haja a manutenção do padrão de uso atual."
             res.json({message: message});
@@ -279,6 +283,6 @@ server.post('/audit/retorna', function(req,res){
 
 
 
-server.listen(5000, ()=>{ //Indica qual porta o server irá rodar.
+server.listen(process.env.PORT || 5000, ()=>{ //Indica qual porta o server irá rodar.
     console.log("Server on")
 })
