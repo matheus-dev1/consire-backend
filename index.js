@@ -56,6 +56,7 @@ server.post('/register', [
     check('senha', 'A senha precisa ter no mínimo 5 dígitos e no máximo 8!').exists().isLength({min:5,max:8}),
     check('confirme', 'A senha precisa ser igual a digitada anteriormente!').exists().isLength({min:5,max:8}),
 ], (req, res) =>{
+    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
     const nome = req.body.nome;
     const email = req.body.email;
     const senha= req.body.senha;
