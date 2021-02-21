@@ -250,7 +250,7 @@ server.post('/audit/retorna', function(req,res){
 	const email = req.body.email;
 	console.log(email)
 
-    const sql = `SELECT audit FROM login WHERE email='${email}'`;
+    const sql = `SELECT audit FROM login WHERE email='xavier.g113@outlook.com'`;
     database.query(sql, (error, resultado) =>{
         if(error){
             console.log(error)
