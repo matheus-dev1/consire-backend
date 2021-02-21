@@ -184,6 +184,7 @@ server.get('/login', (req, res)=>{
 
 
 server.get('/comentarios/retorna', (req, res)=>{
+    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
     const sql = "SELECT * FROM  comentarios;";
     database.query(sql, (error, results) =>{
         res.json(results)  
@@ -199,6 +200,7 @@ server.post('/comentarios/envia', [
     check('sobrenome', 'Sobrenome é obrigatório com pelo menos 3 caracteres').exists().isLength({min:3}),
     check('msg', 'A mensagem precisa ter pelo menos 3 caracteres').exists().isLength({min:3}),
 ], (req, res)=>{
+    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
     const {nome, sobrenome, msg} = req.body; //Desestruturação do corpo da requisiçao em dois elementos que iremos enviar ao bd
     var errors = validationResult(req);
     if(!errors.isEmpty()){
