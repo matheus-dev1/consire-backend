@@ -113,7 +113,7 @@ server.post('/register', [
 
 
 server.post('/login', (req, res) =>{
-    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
+    res.header("Access-Control-Allow-Origin", "*");
     const email = req.body.email;
     const senha= req.body.senha;
 
