@@ -272,7 +272,7 @@ server.post('/audit/retorna', function(req,res){
             
         else if (audit  >= 20){
             const message = 'ZONA IV: Pessoas que se encontram nesse nível apresentam grande chance de ter um diagnóstico de dependência. Nesse caso, é preciso fazer uma avaliação mais cuidadosa e, se confirmado o diagnóstico, deve-se motivar o usuário a procurar atendimento especializado para acompanhamento e encaminhá-lo ao serviço adequado. Lista de Caps-AD (Centros de Atenção Psicossocial em SP):https://www.prefeitura.sp.gov.br/cidade/secretarias/saude/atencao_basica/index.php?p=204204'
-            res.json({message: message, resultado: resultado});
+            res.json(resultado);
         }             
     })            
 });
