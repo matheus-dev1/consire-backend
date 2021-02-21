@@ -18,11 +18,7 @@ const database = connection();
 
 
 //Middlewares
-    server.use(cors({
-        origin:['https://conscire-front.herokuapp.com/'],
-        methods: ['GET', 'POST', 'PUT'],
-        credentials: true
-    })); //Permite a leitura de fontes externas
+    server.use(cors()); //Permite a leitura de fontes externas
 
     server.use(cookie())
 
