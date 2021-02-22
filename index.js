@@ -283,6 +283,7 @@ server.post('/audit/retorna', function(req,res){
 
 
 
-server.listen(process.env.PORT || 5000, ()=>{ //Indica qual porta o server irá rodar.
-    console.log("Server on")
-})
+const PORT = process.env.PORT || 5000
+
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
