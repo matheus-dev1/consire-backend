@@ -218,7 +218,7 @@ server.post('/comentarios/envia', [
     
 })
 
-server.put('/audit/atualiza', verifyJWT, (req, res) =>{
+server.put('/audit/atualiza', (req, res) =>{
     
     const q1 = req.body.q1;
     const q2 = req.body.q2;
