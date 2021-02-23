@@ -19,13 +19,14 @@ const database = connection();
 
 //Middlewares
 server.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
-        res.header("Access-Control-Allow-Credentials", true);
-        res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-        res.header("Access-Control-Allow-Methods", 'GET,PUT,POST');
-        server.use(cors({credentials: true}));
-        next();
+       res.setHeader("Access-Control-Allow-Origin", "*")
+       res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT")
+       res.setHeader("Acess-Control-Allow-Headers", "X-Requested-With, content-type,x-acess-token,Authorization,access-x-btc,elegibility,x-buy-token")
+       res.setHeader("Access-Control-Allow-Credentials", true)
+       return next()
 });
+
+    server.use(cors());
 
     server.use(cookie())
 
@@ -58,7 +59,6 @@ server.post('/register', [
     check('senha', 'A senha precisa ter no mínimo 5 dígitos e no máximo 8!').exists().isLength({min:5,max:8}),
     check('confirme', 'A senha precisa ser igual a digitada anteriormente!').exists().isLength({min:5,max:8}),
 ], (req, res) =>{
-    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
     const nome = req.body.nome;
     const email = req.body.email;
     const senha= req.body.senha;
@@ -116,7 +116,6 @@ server.post('/register', [
 
 
 server.post('/login', (req, res) =>{
-    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
     const email = req.body.email;
     const senha= req.body.senha;
 
@@ -187,7 +186,6 @@ server.get('/login', (req, res)=>{
 
 
 server.get('/comentarios/retorna', (req, res)=>{
-    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
     const sql = "SELECT * FROM  comentarios;";
     database.query(sql, (error, results) =>{
         res.json(results)  
@@ -220,7 +218,7 @@ server.post('/comentarios/envia', [
     
 })
 
-server.put('/audit/atualiza', (req, res) =>{
+server.put('/audit/atualiza', verifyJWT, (req, res) =>{
     
     const q1 = req.body.q1;
     const q2 = req.body.q2;
@@ -234,8 +232,7 @@ server.put('/audit/atualiza', (req, res) =>{
     const q10 = req.body.q10; 
     const email = req.body.email;
     
-    var resultado = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10;
-    console.log(q2)  
+    var resultado = q1+q2+q3+q4+q5+q6+q7+q8+q9+q10;  
     console.log(resultado)
     console.log(email)    
    
@@ -252,7 +249,7 @@ server.put('/audit/atualiza', (req, res) =>{
  
 })
 
-server.post('/audit/retorna', function(req,res){ 
+server.post('/audit/retorna', verifyJWT,function(req,res){ 
     
 	const email = req.body.email;
 	console.log(email)
