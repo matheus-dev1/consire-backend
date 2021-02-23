@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 module.exports = function(){
-    return mysql.create({ //Criando conexão com banco
+    return mysql.createPool({ //Criando conexão com banco
         host: "us-cdbr-east-03.cleardb.com",
         user: "b6981eeb6b1980",
         password: "a495a6fd",
@@ -8,4 +8,3 @@ module.exports = function(){
     });
 }
 
-mysql.createPO
