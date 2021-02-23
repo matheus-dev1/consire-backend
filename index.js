@@ -249,7 +249,7 @@ server.put('/audit/atualiza', (req, res) =>{
  
 })
 
-server.post('/audit/retorna', verifyJWT,function(req,res){ 
+server.post('/audit/retorna', function(req,res){ 
     
 	const email = req.body.email;
 	console.log(email)
