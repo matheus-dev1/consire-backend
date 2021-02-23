@@ -131,7 +131,7 @@ server.post('/login', (req, res) =>{
                     
                     const id = results[0].ID
                     const token = jwt.sign({id}, "jwtSecret", {
-                        expiresIn: 300,
+                        expiresIn: 300 * 300,
                     })
 
                     req.session.user = results;
