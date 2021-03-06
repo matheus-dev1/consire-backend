@@ -59,7 +59,6 @@ server.post('/register', [
     check('senha', 'A senha precisa ter no mínimo 5 dígitos e no máximo 8!').exists().isLength({min:5,max:8}),
     check('confirme', 'A senha precisa ser igual a digitada anteriormente!').exists().isLength({min:5,max:8}),
 ], (req, res) =>{
-    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
     const nome = req.body.nome;
     const email = req.body.email;
     const senha= req.body.senha;
@@ -117,7 +116,7 @@ server.post('/register', [
 
 
 server.post('/login', (req, res) =>{
-    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
+  
     const email = req.body.email;
     const senha= req.body.senha;
 
@@ -188,7 +187,7 @@ server.get('/login', (req, res)=>{
 
 
 server.get('/comentarios/retorna', (req, res)=>{
-    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
+    
     const sql = "SELECT * FROM  comentarios;";
     database.query(sql, (error, results) =>{
         res.json(results)  
@@ -204,7 +203,7 @@ server.post('/comentarios/envia', [
     check('sobrenome', 'Sobrenome é obrigatório com pelo menos 3 caracteres').exists().isLength({min:3}),
     check('msg', 'A mensagem precisa ter pelo menos 3 caracteres').exists().isLength({min:3}),
 ], (req, res)=>{
-    res.header("Access-Control-Allow-Origin", "https://conscire-front.herokuapp.com");
+    
     const {nome, sobrenome, msg} = req.body; //Desestruturação do corpo da requisiçao em dois elementos que iremos enviar ao bd
     var errors = validationResult(req);
     if(!errors.isEmpty()){
