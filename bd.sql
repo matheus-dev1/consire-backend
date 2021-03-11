@@ -20,3 +20,11 @@ CREATE TABLE `squad5`.`login` (
   `audit` int,
   PRIMARY KEY (`idnome`))
   ENGINE=InnoDB DEFAULT CHARSET=utf8;
+               
+               
+  CREATE TABLE `squad5`.`monitoramento` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `q1` int,
+  `q2` int,
+  `q3` int,
+  PRIMARY KEY (`id`))

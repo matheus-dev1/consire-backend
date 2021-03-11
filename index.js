@@ -213,7 +213,7 @@ server.post('/comentarios/envia', [
     }
     const sql = `INSERT INTO comentarios (nome, sobrenome, msg) values ('${nome}', '${sobrenome}', '${msg}')`;
     database.query(sql, (error, results) =>{
-        const newLocal = "Agradecemos pela mensagem!!";
+        const newLocal = "Agradecemos pela mensagem - valeu";
         res.json({auth: false, validacao:errors, message: newLocal})
 
     })
