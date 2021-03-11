@@ -282,6 +282,21 @@ server.post('/audit/retorna', function(req,res){
     })            
 });
 
+server.get('/monitoramento/retorna', (req, res)=>{
+    var sql = "SELECT * FROM  monitoramento"
+    database.query(sql, (error, results)=>{ 
+        res.json(results) 
+    })
+});
+
+server.post('/monitoramento/register', (req, res)=>{
+    var {q1, q2, q3} = req.body;
+    var sql = `INSERT INTO monitoramento (q1, q2, q3) values ('${q1}', '${q2}', '${q3}')`
+    database.query(sql, (errors,results)=>{
+        const newLocal = "Agradecemos pelo seu feedback!!";
+        res.json({auth: false, validacao:errors, message: newLocal})
+    })
+}); 
 
 
 const PORT = process.env.PORT || 5000
